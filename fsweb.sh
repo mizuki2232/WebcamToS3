@@ -1,5 +1,10 @@
-#!/bin/sh
+!/bin/sh
 
-DATE=$(date +"%Y-%m-%d_%H%M")
-
-fswebcam $DATE.jpg
+while :
+do
+    DATE=$(date +"%Y-%m-%d_%H%M%S")
+    fswebcam $DATE.jpg
+    aws s3 cp $DATE.jpg s3://yourbucketname
+    rm $DATE.jpg
+    sleep 10
+done
